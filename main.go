@@ -21,6 +21,7 @@ func main() {
 		// Ambil file dari form
 		file, err := c.FormFile("image")
 		if err != nil {
+			log.Println(err)
 			return c.Status(fiber.StatusBadRequest).SendString("File upload error")
 		}
 
@@ -33,7 +34,7 @@ func main() {
 		// Simpan file ke folder "uploads"
 		err = c.SaveFile(file, filePath)
 		if err != nil {
-			fmt.Println("Error saving file:", err)
+			log.Println(err)
 			return c.Status(fiber.StatusInternalServerError).SendString("Failed to save file")
 		}
 
